@@ -1,0 +1,8 @@
+@import "~bootstrap/scss/bootstrap";
+@import "modules/navbar.scss";
+@import "modules/_variables.scss";
+
+body {
+    background-color: var(--secondaryColor);
+    color: white;
+}

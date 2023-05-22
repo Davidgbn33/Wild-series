@@ -1,0 +1,13 @@
+nav {
+  background: var(--primaryColor);
+  img{
+    width: 50px;
+  }
+  .WS_container {
+    flex-grow: 0;
+  }
+
+  a {
+    font-family: var(--FontFamilyTitle);
+  }
+}

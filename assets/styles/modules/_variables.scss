@@ -1,0 +1,17 @@
+:root{
+  --primaryColor: #C57B57 ;
+  --secondaryColor: #041F1E ;
+  --thirdColor: #F7DBA7;
+  --FontFamilyTitle : 'Playfair Display', serif;
+  --FontFamilyText: 'lora', serif;
+  --textColor: white;
+}
+
+.WS_btn{
+  border: 1px solid black;
+  border-radius: 10px;
+  background: var(--thirdColor);
+  font-family: var(--FontFamilyText);
+  font-weight: bold;
+  margin: 0 5rem;
+}
