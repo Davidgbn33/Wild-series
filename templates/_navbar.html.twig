@@ -15,8 +15,15 @@
 
                     </a>
                     <ul class="dropdown-menu ms-5">
-                        <li><a class="dropdown-item me-2" href="{{ path('program_list', {page: 4}) }}">page 4</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+
+                        {#{% for categorie in categories %}
+                            <div>
+                                <li><a href="{{ path("category_show", { categoryName : categorie.name }) }}">{{ categorie.name}}</a></li>
+                            </div>
+                        {% else %}
+                            Aucune catégorie trouvé.
+                        {% endfor %}#}
+                        <li><a class="dropdown-item me-2" href="{{path('category_index')}}">catégorie</a></li
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
@@ -35,7 +42,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="WS_btn nav-link" href="{{ path('program_index') }}">Mes favoris</a>
+                    <a class="WS_btn nav-link" href="{{ path('program_index') }}">Mes Séries</a>
                 </li>
             </ul>
         </div>

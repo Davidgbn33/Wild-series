@@ -40,7 +40,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (self::PROGRAM as $key => $values) {
 
-                $program = new Program();
+            $program = new Program();
             $program->setTitle($values['title']);
             $program->setSynopsis($values['synopsis']);
             $program->setCategory($this->getReference('category_'.$values['category']));
