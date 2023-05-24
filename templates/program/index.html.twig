@@ -5,16 +5,18 @@
 
 
 {% block body %}
-
-    <h1>Toutes les series de la table program :</h1>
+<div class="d-flex flex-column align-items-center">
+    <h1 class="my-3">Toutes les series</h1>
+    <div class="d-flex flex-column">
     {% for program in programs %}
     <div>
-        <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
-        <p>{{ program.synopsis }}</p>
-        <a href="{{ path("program_show", { id: program.id}) }}">Voir la fiche</a>
+        <h2 class="my-2">Catégorie : {{ program.category.name }}</h2>
+        <h3> {{ program.title }}  </h3>
+        <a class="WS_btnFiche" href="{{ path("program_show", { id: program.id}) }}">Voir la fiche</a>
     </div>
     {% else %}
      Aucun série trouvé.
     {% endfor %}
-
+    </div>
+</div>
 {% endblock %}
