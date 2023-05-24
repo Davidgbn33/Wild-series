@@ -13,27 +13,32 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         1 =>[
             'title' => 'walkind dead',
             'synopsis' => 'Des zombies envahissent la terre',
-            'category'=> 'Action'
+            'category'=> 'Action',
+            'year'=> 2000,
             ],
         2 =>[
             'title' => 'How I meet your Mother',
             'synopsis' => "l'histoire d'un père de famille qui raconte ca rencontre",
-            'category' => 'Aventure'
+            'category' => 'Aventure',
+            'year'=> 2000,
             ],
         3 =>[
             'title' => 'naruto',
             'synopsis' => "apprentissage ninja",
-            'category' => 'Animation'
+            'category' => 'Animation',
+            'year'=> 2000,
         ],
         4 =>[
             'title' => 'chucky',
             'synopsis' => "petite poupée adorable qui découpe des personnes",
-            'category' => 'Horreur'
+            'category' => 'Horreur',
+            'year'=> 2000,
         ],
         5 =>[
             'title' => 'bilbon',
             'synopsis' => "découverte de la terre du milieu",
-            'category' => 'Fantastique'
+            'category' => 'Fantastique',
+            'year'=> 1999,
         ],
     ];
     public function load(ObjectManager $manager)
@@ -43,8 +48,11 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program = new Program();
             $program->setTitle($values['title']);
             $program->setSynopsis($values['synopsis']);
+            $program->setYear($values['year']);
             $program->setCategory($this->getReference('category_'.$values['category']));
+            $valueTitle = $values['title'];
             $manager->persist($program);
+            $this->addReference('program_' . $valueTitle, $program);
         }
         $manager->flush();
     }
