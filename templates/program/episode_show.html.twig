@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Série #{{ episode.id }}{% endblock %}
+
+{% block body %}
+    <div class="media d-flex justify-content-center">
+        <div class="media-body d-flex flex-column align-items-center">
+            <h1 class="mt-0">{{ program.title }}</h1>
+            <h2>Liste des épisode</h2>
+            <h3>Saison {{ season.number }}</h3>
+            <div class="d-flex flex-column">
+                {% for episode in season.episodes %}
+                    <p>Episode {{ loop.index }} : {{ episode.title }}</p>
+                    <p>Synopsis : {{ episode.synopsis }}</p>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
