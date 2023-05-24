@@ -2,6 +2,7 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Repository\SeasonRepository;
 use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +27,7 @@ class ProgramController extends AbstractController
     public function show(int $id, ProgramRepository $programRepository): Response
     {
         $program = $programRepository->findOneBy(['id'=> $id]);
+
 // vérification de l'id dans la table program
         if(!$program){
             throw $this->createNotFoundException(
@@ -33,8 +35,19 @@ class ProgramController extends AbstractController
             );
         }
         return $this->render('program/show.html.twig', [
-            'program' => $program,
+            'program' => $program
             ]);
-
     }
+ #[Route('/{programId}/seasons/{seasonId}', name: 'season_show',methods: ['get'])]
+    public function showSeason(ProgramRepository $programRepository, SeasonRepository $seasonRepository,int $programId, int $seasonId)
+    {
+        $program = $programRepository->findOneBy(['id'=> $programId]);
+            $season = $seasonRepository->findOneBy(['id'=> $seasonId]);
+
+        return $this->render('program/season_show.html.twig', [
+            'program' => $program,
+            'season' => $season,
+        ]);
+    }
+
 }
