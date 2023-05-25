@@ -5,7 +5,7 @@
 {% block body %}
     {{ form_start(form) }}
 
-    {{ form_widget(form) }}
+    {{ form_widget(form, { 'attr': {'class': 'test'} }) }}
 
     <button type="submit">Ajout d'une category</button>
 

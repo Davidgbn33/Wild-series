@@ -26,7 +26,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, CategoryRepository $categoryRepository) : Response
+    public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
         // Create a new Category Object
         $category = new Category();
@@ -38,13 +38,11 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted()) {
             $categoryRepository->save($category, true);
-
         }
         // Render the form
         return $this->render('category/new.html.twig', [
             'form' => $form,
         ]);
-
     }
 
     #[Route('/{categoryName}', name: 'show')]
@@ -62,6 +60,4 @@ class CategoryController extends AbstractController
 
         return $this->render('category/show.html.twig', ['categoryName' => $categoryName, 'programs' => $programs]);
     }
-
-
 }
