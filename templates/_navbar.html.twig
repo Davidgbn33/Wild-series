@@ -27,7 +27,6 @@
                     <a class=" WS_btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         Acteur
-
                     </a>
                     <ul class="dropdown-menu">
                         <form class="d-flex" role="search">
@@ -43,6 +42,18 @@
                 <li class="nav-item">
                     <a class="WS_btn nav-link" href="{{ path('category_index') }}">Mes Catégories</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class=" WS_btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Formulaire
+                    </a>
+                    <ul class="dropdown-menu ms-5">
+                        <li><a class="dropdown-item me-2" href="{{ path('category_new') }}">Ajout d'une catégorie</a></li
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ path('program_new') }}">Ajout d'un programme</a></li>
+                    </ul>
             </ul>
         </div>
         <div class="collapse navbar-collapse WS_container" id="navbarSupportedContent">
