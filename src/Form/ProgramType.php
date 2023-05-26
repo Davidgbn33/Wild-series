@@ -3,13 +3,16 @@
 namespace App\Form;
 
 use App\Entity\Program;
-use Doctrine\DBAL\Types\IntegerType;
-use phpDocumentor\Reflection\Types\Integer;
+use App\Entity\Category;
+use App\Entity\Actor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 class ProgramType extends AbstractType
 {
@@ -17,9 +20,19 @@ class ProgramType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('synopsis', TextType::class)
+            ->add('synopsis', TextareaType::class)
             ->add('year', NumberType::class)
-            ->add('category', null, ['choice_label'=> 'name'])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+            ])
+            ->add('actors', EntityType::class, [
+                'class' => Actor::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

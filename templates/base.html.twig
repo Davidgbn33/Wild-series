@@ -10,6 +10,16 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+        {% for category, messages in app.flashes %}
+
+            {% for message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ActorController!{% endblock %}
+
+{% block body %}
+
+
+<ul>
+    <h1>Acteur : {{ actor.name }}</h1>
+
+    {% for actor in actor.programs %}
+
+        <li>{{ actor.title }}</li>
+        <a href="{{ path("program_show", { id: actor.id}) }}">test</a>
+
+    {% else %}
+
+        <li>Aucun acteur pour cette série</li>
+
+    {% endfor %}
+
+</ul>
+{% endblock %}
