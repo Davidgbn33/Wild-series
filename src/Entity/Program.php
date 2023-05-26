@@ -19,12 +19,12 @@ class Program
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Ne me laisse pas vide')]
+    #[ORM\Column(length: 10)]
+#[Assert\NotBlank(message: "pas nul")]
+    #[Assert\Length(max: 10, maxMessage: "title too long")]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Ne peux pas étre vide')]
     private ?string $synopsis = null;
 
     #[ORM\Column(length: 255, nullable: true)]
