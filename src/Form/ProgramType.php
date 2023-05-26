@@ -5,8 +5,6 @@ namespace App\Form;
 use App\Entity\Program;
 use App\Entity\Category;
 use App\Entity\Actor;
-use Doctrine\DBAL\Types\IntegerType;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
