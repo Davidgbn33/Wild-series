@@ -12,8 +12,9 @@
                 {% for episode in season.episodes %}
                     <p>Episode {{ loop.index }} : {{ episode.title }}</p>
                     <p>Synopsis : {{ episode.synopsis }}</p>
+                    <p>Durée : {{ episode.duration }} min</p>
                 {% endfor %}
-
+                <a href="{{ path('episode_show', {'slug': episode.slug}) }}">show</a>
             </div>
         </div>
     </div>

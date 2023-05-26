@@ -9,6 +9,7 @@
             <img class=" mr-3 w-25" src="" alt="{{ program.title }} poster">
             <p>{{ program.synopsis }}</p>
             <p>Catégorie : {{ program.category.name }}</p>
+            <p>Durée : {{ programDuration }} minutes</p>
            {% for seasons in program.seasons %}
                <a href="{{ path("program_season_show", { programId: program.id, seasonId: seasons.id}) }}">Saison : {{ seasons.number }}</a>
             {% endfor %}
