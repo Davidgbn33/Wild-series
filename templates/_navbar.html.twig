@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg w-100">
     <div class=" container-fluid">
         {# ligne pour icone #}
         <img src="{{ asset('build/images/logo.png') }}" alt="logo">
@@ -30,7 +30,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control " type="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
 
@@ -40,7 +40,16 @@
                     <a class="WS_btn nav-link" href="{{ path('program_index') }}">Mes Séries</a>
                 </li>
                 <li class="nav-item">
+                    <a class="WS_btn nav-link" href="{{ path('app_season_index') }}">Mes Saisons</a>
+                </li>
+                <li class="nav-item">
                     <a class="WS_btn nav-link" href="{{ path('category_index') }}">Mes Catégories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="WS_btn nav-link" href="{{ path('actor_index') }}">Mes Acteurs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="WS_btn nav-link" href="{{ path('episode_index') }}">Mes Episodes</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class=" WS_btn nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

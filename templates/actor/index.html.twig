@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ActorController!{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="my-3">Toutes les acteurs</h1>
+        <div class="d-flex flex-column">
+            {% for actor in actors %}
+                <div>
+                    <h3> {{ actor.name }}  </h3>
+                    <a class="WS_btnFiche" href="{{ path("actor_show", { id: actor.id}) }}">Voir la fiche</a>
+                </div>
+            {% else %}
+                Aucun série trouvé.
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
