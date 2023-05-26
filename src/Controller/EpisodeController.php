@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Episode;
 use App\Form\EpisodeType;
 use App\Repository\EpisodeRepository;
+use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 #[Route('/episode', name: 'episode_')]
 class EpisodeController extends AbstractController
@@ -22,8 +24,9 @@ class EpisodeController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EpisodeRepository $episodeRepository): Response
+    public function new(Request $request, EpisodeRepository $episodeRepository, ProgramRepository $programRepository): Response
     {
+        $program = $programRepository->findAll();
         $episode = new Episode();
         $form = $this->createForm(EpisodeType::class, $episode);
         $form->handleRequest($request);
@@ -37,6 +40,7 @@ class EpisodeController extends AbstractController
         return $this->renderForm('episode/new.html.twig', [
             'episode' => $episode,
             'form' => $form,
+            'program'=> $program,
         ]);
     }
 
