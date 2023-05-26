@@ -12,7 +12,7 @@
     <div>
         <h2 class="my-2">Catégorie : {{ program.category.name }}</h2>
         <h3> {{ program.title }}  </h3>
-        <a class="WS_btnFiche" href="{{ path("program_show", { id: program.id}) }}">Voir la fiche</a>
+        <a class="WS_btnFiche" href="{{ path("program_show", { slug: program.slug}) }}">Voir la fiche</a>
     </div>
         <strong>Acteurs :</strong>
         <ul>

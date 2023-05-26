@@ -7,6 +7,7 @@ use App\Entity\Program;
 use App\Entity\Season;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
+use App\Service\ProgramDuration;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,12 +39,12 @@ class ProgramController extends AbstractController
     public function new(Request $request, ProgramRepository $programRepository, SluggerInterface $slugger): Response
     {
         $program = new Program();
-        $slug = $slugger->slug($program->getTitle());
-        $program->setSlug($slug);
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+        $slug = $slugger->slug($program->getTitle());
+        $program->setSlug($slug);
             $programRepository->save($program, true);
 
             $this->addFlash('success', 'The new program has been created');
@@ -54,8 +55,8 @@ class ProgramController extends AbstractController
     }
 
 
-    #[Route('/show/{id}', name: 'show', requirements: ['page' => '\d+'], methods: ['GET'])]
-    public function show(Program $program): Response
+    #[Route('/show/{slug}', name: 'show', requirements: ['page' => '\d+'], methods: ['GET'])]
+    public function show(Program $program, ProgramDuration $programDuration): Response
     {
         /*$program = $programRepository->findOneBy(['id'=> $id]);*/
 
@@ -66,7 +67,8 @@ class ProgramController extends AbstractController
             );
         }*/
         return $this->render('program/show.html.twig', [
-            'program' => $program
+            'program' => $program,
+            'programDuration' => $programDuration->calculate($program)
         ]);
     }
 
