@@ -9,6 +9,8 @@ use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -25,7 +27,7 @@ class EpisodeController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EpisodeRepository $episodeRepository, ProgramRepository $programRepository, SluggerInterface $slugger): Response
+    public function new(Request $request, EpisodeRepository $episodeRepository, ProgramRepository $programRepository,MailerInterface $mailer, SluggerInterface $slugger): Response
     {
         $program = $programRepository->findAll();
         $episode = new Episode();
@@ -36,6 +38,14 @@ class EpisodeController extends AbstractController
             $slug = $slugger->slug($episode->getTitle());
             $episode->setSlug($slug);
             $episodeRepository->save($episode, true);
+            $email = (new Email())
+
+                ->from('gibon.david@live.fr')
+                ->to('gibon.david@live.fr')
+                ->subject('Un nouvel épisode vient d\'être publiée !')
+                ->html($this->renderView('episode/newEpisodeEmail.html.twig', ['episode'=> $episode, 'program' => $episode->getSeason()->getProgram()]));
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -69,6 +79,7 @@ class EpisodeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $episodeRepository->save($episode, true);
+
 
             return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
         }
