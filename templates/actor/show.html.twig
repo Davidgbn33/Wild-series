@@ -10,8 +10,9 @@
 
     {% for actor in actor.programs %}
 
-        <li>{{ actor.title }}</li>
-        <a href="{{ path("program_show", { id: actor.id}) }}">test</a>
+
+        <a href="{{ path("program_show", { 'slug': actor.slug}) }}"><li>{{ actor.title }}</li></a>
+        <img src="{{ vich_uploader_asset(actor) }}" alt="">
 
     {% else %}
 
