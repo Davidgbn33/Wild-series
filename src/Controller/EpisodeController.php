@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Episode;
+use App\Form\CommentType;
 use App\Form\EpisodeType;
+use App\Repository\CommentRepository;
 use App\Repository\EpisodeRepository;
 use App\Repository\ProgramRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,6 +24,11 @@ class EpisodeController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(EpisodeRepository $episodeRepository): Response
     {
+
+
+
+
+
         return $this->render('episode/index.html.twig', [
             'episodes' => $episodeRepository->findAll(),
         ]);
@@ -56,20 +64,35 @@ class EpisodeController extends AbstractController
             'program'=> $program,
         ]);
     }
-    #[Route('/{slug}', name: 'show', methods: ['GET'])]
-    public function show(Episode $episode): Response
+
+
+    #[Route('/{slug}', name: 'show', methods: ['GET', 'POST'])]
+    public function show(Request $request,Episode $episode, CommentRepository $commentRepository): Response
     {
+
+
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $commentRepository->save($comment, true);
+
+            return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $comment = $commentRepository->findBy(['episode' => $episode]);
+
         return $this->render('episode/show.html.twig', [
             'episode' => $episode,
+            'comment' => $comment,
+            'form' => $form,
         ]);
     }
-  /*  #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Episode $episode): Response
-    {
-        return $this->render('episode/show.html.twig', [
-            'episode' => $episode,
-        ]);
-    }*/
+
 
     #[Route('/{slug}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Episode $episode, EpisodeRepository $episodeRepository): Response
